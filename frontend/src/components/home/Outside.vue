@@ -51,13 +51,13 @@ export default {
         this.temperature = temp.toFixed(1)
       },
       setHumd(humd) {
-        this.humidity = humd
+        this.humidity = humd.toFixed(1)
       },
       setMaxtemp(maxTemp) {
         this.maxtemperature = maxTemp.toFixed(1)
       },
       setPrecip(precip) {
-        this.precipitation = precip * 100
+        this.precipitation = (precip * 100).toFixed(1)
       },
       setFeelsLike(feelsLike) {
         this.feelslike = feelsLike.toFixed(1)
