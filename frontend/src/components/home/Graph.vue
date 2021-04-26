@@ -190,7 +190,7 @@ export default {
       });
     },
     getTotalStockData() {
-      let URL = "https://dashboard.icheered.nl/ctb/api/history/total?amount=1000" 
+      let URL = "https://dashboard.icheered.nl/stb/api/history/total?amount=1000" 
       fetch(URL)
       .then((response) => response.json())
       .then((data) => {
