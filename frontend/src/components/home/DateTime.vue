@@ -42,7 +42,7 @@ export default {
     updateTime() {
       var today = new Date();
 
-      this.currenttime = today.getHours() + ":" + (today.getMinutes()<10?'0':'') + today.getMinutes();
+      this.currenttime =  (today.getHours()<10?'0':'') + today.getHours() + ":" + (today.getMinutes()<10?'0':'') + today.getMinutes();
       var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       this.currentweekday = days[today.getDay()]
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
