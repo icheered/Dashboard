@@ -190,7 +190,7 @@ export default {
       });
     },
     getTotalStockData() {
-      let URL = "https://dashboard.icheered.nl/stb/api/history/total?amount=1000" 
+      let URL = "https://dashboard.icheered.nl/stb/api/history/total" 
       fetch(URL)
       .then((response) => response.json())
       .then((data) => {
@@ -204,9 +204,13 @@ export default {
   mounted() {
     this.getTotalCryptoData()
     this.getTotalStockData()
-    setInterval(() => {
-        this.getTotalCryptoData()}, 60000)
+    // Update crypto data every minute
+    setInterval(() => { this.getTotalCryptoData() }, 60000)
+    // Update stock data every 12 hrs
+    setInterval(() => { this.getTotalStockData() }, 43200000)
   }
+
+    
 }
 </script>
 
