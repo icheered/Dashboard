@@ -179,7 +179,7 @@ export default {
       }]);
     },
     getTotalCryptoData() {
-      let URL = "https://dashboard.icheered.nl/ctb/api/history/total?datapoints=1000" 
+      let URL = "https://dashboard.icheered.nl/ctb/api/history/total?datapoints=100" 
       fetch(URL)
       .then((response) => response.json())
       .then((data) => {
@@ -209,8 +209,6 @@ export default {
     // Update stock data every 12 hrs
     setInterval(() => { this.getTotalStockData() }, 43200000)
   }
-
-    
 }
 </script>
 

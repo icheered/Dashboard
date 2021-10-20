@@ -3,17 +3,16 @@ import asyncio
 import json
 from datetime import datetime
 
-import uvicorn
-from uvicorn import Config
-
+from dashboard.api.routers.toggle_router import Toggle_Router
+from dashboard.api.uvicorn import UvicornServer
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.routing import Mount, Route
 
-from dashboard.api.uvicorn import UvicornServer
+import uvicorn
+from uvicorn import Config
 
 
 class Server:
@@ -22,16 +21,16 @@ class Server:
         self.logger = logger
         self.loop = loop
 
-        self.wscounter = 0
-
         app = FastAPI(redoc_url=None, docs_url="/docs", log_level="trace")
         app.mount("/web/static", StaticFiles(directory="web/static"), name="static")
 
-        #Create a custom 404 handler (in VueJS)
+        # Create a custom 404 handler (in VueJS)
         @app.exception_handler(404)
         async def custom_handler(request, ex):
             return FileResponse("web/index.html", media_type="text/html")
-    
+
+        app.include_router(Toggle_Router, prefix="/api", tags=["Controll Dashboard"])
+
         deps = {}
         deps["config"] = config
         deps["logger"] = logger
@@ -54,7 +53,7 @@ class Server:
             host=self.config["API_ADDRESS"],
             port=self.config["API_PORT"],
             reload=True,
-            debug=True
+            debug=True,
         )
 
         self.server = UvicornServer(uvi_conf)
